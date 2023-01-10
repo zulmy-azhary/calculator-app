@@ -1,0 +1,97 @@
+:root {
+  /* Breakpoints */
+  --mobile: 375px;
+  --desktop: 1440px;
+
+  /* Colors */
+  /*! Background */
+  --bgMainColor: hsl(222, 26%, 31%);
+  --bgKeypad: hsl(223, 31%, 20%);
+  --bgScreen: hsl(224, 36%, 15%);
+
+  /*! Key */
+  --bgKeySecondary: hsl(225, 21%, 49%);
+  --bgKeySecondaryShadow: hsl(224, 28%, 35%);
+
+  --bgKeyAccent: hsl(6, 63%, 50%);
+  --bgKeyAccentShadow: hsl(6, 70%, 34%);
+
+  --bgKeyMain: hsl(30, 25%, 89%);
+  --bgKeyMainShadow: hsl(28, 16%, 65%);
+
+  /*! Text */
+  --mainText: hsl(221, 14%, 31%);
+
+  font-family: "League Spartan";
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 800;
+
+  color-scheme: light dark;
+  color: var(--mainText);
+  background-color: var(--bgMainColor);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+html[data-theme="theme-2"]:root {
+  --bgMainColor: hsl(0, 0%, 90%);
+  --bgKeypad: hsl(0, 5%, 81%);
+  --bgScreen: hsl(0, 0%, 93%);
+
+  --bgKeySecondary: hsl(185, 42%, 37%);
+  --bgKeySecondaryShadow: hsl(185, 58%, 25%);
+  --bgKeyAccent: hsl(25, 98%, 40%);
+  --bgKeyAccentShadow: hsl(25, 99%, 27%);
+  --bgKeyMain: hsl(45, 7%, 89%);
+  --bgKeyMainShadow: hsl(35, 11%, 61%);
+
+  --mainText: hsl(60, 10%, 19%);
+}
+
+html[data-theme="theme-3"]:root {
+  --bgMainColor: hsl(268, 75%, 9%);
+  --bgKeypad: hsl(268, 71%, 12%);
+  --bgScreen: var(--bgKeypad);
+
+  --bgKeySecondary: hsl(281, 89%, 26%);
+  --bgKeySecondaryShadow: hsl(285, 91%, 52%);
+  --bgKeyAccent: hsl(176, 100%, 44%);
+  --bgKeyAccentShadow: hsl(177, 92%, 70%);
+  --bgKeyMain: hsl(268, 47%, 21%);
+  --bgKeyMainShadow: hsl(290, 70%, 36%);
+
+  --mainText: hsl(52, 100%, 62%);
+}
+
+h1 {
+  padding: 1rem 2rem;
+  background-color: white;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: var(--mobile);
+  min-height: 100vh;
+}
+
+#app {
+  max-width: calc(var(--desktop) / 2.5);
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+}
