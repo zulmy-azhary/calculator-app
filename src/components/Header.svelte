@@ -22,8 +22,18 @@
 </script>
 
 <header>
-  <button on:click={toggle}>Press me</button>
+  <h1 class="logo">calc</h1>
+  <button on:click={toggle}>Toggle</button>
 </header>
 
-<style>
+<style scoped>
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    color: var(--textScreen);
+  }
 </style>

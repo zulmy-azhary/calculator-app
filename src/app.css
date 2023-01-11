@@ -20,7 +20,10 @@
   --bgKeyMainShadow: hsl(28, 16%, 65%);
 
   /*! Text */
-  --mainText: hsl(221, 14%, 31%);
+  --textMain: hsl(221, 14%, 31%);
+  --textSecondary: hsl(0, 0%, 100%);
+  --textAccent: var(--textSecondary);
+  --textScreen: var(--textSecondary);
 
   font-family: "League Spartan";
   font-size: 16px;
@@ -38,6 +41,7 @@
   -webkit-text-size-adjust: 100%;
 }
 
+/* Theme 2 */
 html[data-theme="theme-2"]:root {
   --bgMainColor: hsl(0, 0%, 90%);
   --bgKeypad: hsl(0, 5%, 81%);
@@ -50,9 +54,13 @@ html[data-theme="theme-2"]:root {
   --bgKeyMain: hsl(45, 7%, 89%);
   --bgKeyMainShadow: hsl(35, 11%, 61%);
 
-  --mainText: hsl(60, 10%, 19%);
+  --textMain: hsl(60, 10%, 19%);
+  --textSecondary: hsl(0, 0%, 100%);
+  --textAccent: var(--textSecondary);
+  --textScreen: var(--textMain);
 }
 
+/* Theme 3 */
 html[data-theme="theme-3"]:root {
   --bgMainColor: hsl(268, 75%, 9%);
   --bgKeypad: hsl(268, 71%, 12%);
@@ -65,12 +73,16 @@ html[data-theme="theme-3"]:root {
   --bgKeyMain: hsl(268, 47%, 21%);
   --bgKeyMainShadow: hsl(290, 70%, 36%);
 
-  --mainText: hsl(52, 100%, 62%);
+  --textMain: hsl(52, 100%, 62%);
+  --textSecondary: hsl(0, 0%, 100%);
+  --textAccent: hsl(198, 20%, 13%);
+  --textScreen: var(--textMain);
 }
 
-h1 {
-  padding: 1rem 2rem;
-  background-color: white;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -82,11 +94,13 @@ body {
 }
 
 #app {
-  max-width: calc(var(--desktop) / 2.5);
+  max-width: calc(var(--desktop) / 2.25);
   width: 100%;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
 }
 
 @media (prefers-color-scheme: light) {

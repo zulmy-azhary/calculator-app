@@ -1,25 +1,17 @@
 <script lang="ts">
-  import Header from "./components/Header.svelte";
-  import Key from "./components/Key.svelte";
+  import { Header, Screen, Keypad } from "./components";
 </script>
 
 <Header />
 <main>
-  <Key>1</Key>
-  <Key>1</Key>
-  <Key>1</Key>
-  <Key>1</Key>
-  <Key>1</Key>
-  <Key>1</Key>
-  <Key>1</Key>
+  <Screen />
+  <Keypad />
 </main>
 
 <style>
   main {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 2rem;
-    padding: 2rem;
-    background-color: var(--bgKeypad);
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5rem;
   }
 </style>
