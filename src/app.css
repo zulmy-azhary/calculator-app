@@ -86,7 +86,6 @@ html[data-theme="theme-3"]:root {
 }
 
 body {
-  margin: 0;
   display: flex;
   place-items: center;
   min-width: var(--mobile);
@@ -101,6 +100,10 @@ body {
   display: flex;
   flex-direction: column;
   row-gap: 2rem;
+}
+
+button {
+  cursor: pointer;
 }
 
 @media (prefers-color-scheme: light) {

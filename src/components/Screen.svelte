@@ -1,8 +1,9 @@
 <script lang="ts">
+  import { calc } from "../stores/calc";
 </script>
 
 <section class="screen">
- <p class="output">399,981</p>
+ <p class="output">{$calc}</p>
 </section>
 
 <style scoped>
@@ -15,6 +16,7 @@
     justify-content: end;
     align-items: center;
     border-radius: 10px;
+    overflow-x: hidden;
   }
 
   .output {

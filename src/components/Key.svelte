@@ -1,28 +1,83 @@
-<script lang="ts"></script>
+<script lang="ts">
+  import { onMount } from "svelte";
+  import { calc } from "../stores/calc";
 
-<button class="primary" {...$$props}>
+  type Variant = "number" | "operator" | "decimal" | "delete" | "reset" | "compute";
+  export let variant: Variant = "number";
+  let button: HTMLButtonElement;
+  let data = "";
+
+  let firstValue: number = null;
+  let operator: string = null;
+  let waitingSecondValue: boolean = false;
+
+  const appendNumber = (number: number) => {
+    if ($calc.length >= 16) return;
+    if ($calc === "0") return ($calc = number.toString());
+
+    if (waitingSecondValue) {
+      $calc = "";
+      waitingSecondValue = false;
+    }
+    $calc += number;
+  };
+
+  const chooseOperator = (operator: string) => {};
+
+  const appendDecimal = () => {
+    if (!$calc.includes(".")) {
+      $calc += ".";
+    }
+  };
+
+  const deleteLastChar = () => {
+    if ($calc.length <= 1) return ($calc = "0");
+    return ($calc = $calc.slice(0, -1));
+  };
+
+  const reset = () => {
+    // firstValue = null;
+    // operator = null;
+    // waitingSecondValue = false;
+    calc.reset();
+  };
+
+  const compute = () => {};
+
+  const handleButton = () => {
+    if (variant === "number") return appendNumber(+data);
+    if (variant === "operator") return chooseOperator(data);
+    if (variant === "decimal") return appendDecimal();
+    if (variant === "delete") return deleteLastChar();
+    if (variant === "reset") return reset();
+    return compute();
+  };
+
+  onMount(() => (data = button.innerText));
+</script>
+
+<button class="primary" {...$$props} bind:this={button} on:click={handleButton}>
   <slot />
 </button>
 
-<style>
+<style scoped>
   button {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0.9rem 1rem;
     border: none;
-    cursor: pointer;
     border-radius: 10px;
     font-family: "League Spartan";
     font-size: 2.5rem;
     font-weight: 700;
-    transition: 0.2s ease-in-out;
+    transition: transform 0.2s, box-shadow 0.2s;
     background-color: var(--bgColor);
     color: var(--color);
-    box-shadow: 0 5px var(--boxShadow);
+    box-shadow: 0 4px var(--boxShadow);
   }
   button:active {
-    transform: translateY(5px);
+    transform: translateY(4px);
     box-shadow: 0 0 var(--boxShadow);
   }
 

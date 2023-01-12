@@ -6,21 +6,21 @@
   <Key>7</Key>
   <Key>8</Key>
   <Key>9</Key>
-  <Key class="secondary">Del</Key>
+  <Key variant="delete" class="secondary">Del</Key>
   <Key>4</Key>
   <Key>5</Key>
   <Key>6</Key>
-  <Key>+</Key>
+  <Key variant="operator">+</Key>
   <Key>1</Key>
   <Key>2</Key>
   <Key>3</Key>
-  <Key>-</Key>
-  <Key>.</Key>
+  <Key variant="operator">-</Key>
+  <Key variant="decimal">.</Key>
   <Key>0</Key>
-  <Key>/</Key>
-  <Key>x</Key>
-  <Key class="secondary col-span-2">Reset</Key>
-  <Key class="accent col-span-2">=</Key>
+  <Key variant="operator">/</Key>
+  <Key variant="operator">x</Key>
+  <Key variant="reset" class="secondary col-span-2">Reset</Key>
+  <Key variant="compute" class="accent col-span-2">=</Key>
 </section>
 
 <style scoped>
