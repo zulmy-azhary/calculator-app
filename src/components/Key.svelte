@@ -1,62 +1,29 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { calc } from "../stores/calc";
+  import { onMount, createEventDispatcher } from "svelte";
+  import type { Variant } from "../types";
 
-  type Variant = "number" | "operator" | "decimal" | "delete" | "reset" | "compute";
   export let variant: Variant = "number";
   let button: HTMLButtonElement;
-  let data = "";
+  let data: string = "";
+  const dispatch = createEventDispatcher();
 
-  let firstValue: number = null;
-  let operator: string = null;
-  let waitingSecondValue: boolean = false;
-
-  const appendNumber = (number: number) => {
-    if ($calc.length >= 16) return;
-    if ($calc === "0") return ($calc = number.toString());
-
-    if (waitingSecondValue) {
-      $calc = "";
-      waitingSecondValue = false;
-    }
-    $calc += number;
-  };
-
-  const chooseOperator = (operator: string) => {};
-
-  const appendDecimal = () => {
-    if (!$calc.includes(".")) {
-      $calc += ".";
-    }
-  };
-
-  const deleteLastChar = () => {
-    if ($calc.length <= 1) return ($calc = "0");
-    return ($calc = $calc.slice(0, -1));
-  };
-
-  const reset = () => {
-    // firstValue = null;
-    // operator = null;
-    // waitingSecondValue = false;
-    calc.reset();
-  };
-
-  const compute = () => {};
-
+  // Send variant & data back to parent component (Keypad)
   const handleButton = () => {
-    if (variant === "number") return appendNumber(+data);
-    if (variant === "operator") return chooseOperator(data);
-    if (variant === "decimal") return appendDecimal();
-    if (variant === "delete") return deleteLastChar();
-    if (variant === "reset") return reset();
-    return compute();
+    dispatch("key", {
+      variant,
+      data,
+    });
   };
 
   onMount(() => (data = button.innerText));
 </script>
 
-<button class="primary" {...$$props} bind:this={button} on:click={handleButton}>
+<button
+  class={$$props.class ?? "primary"}
+  {...$$restProps}
+  bind:this={button}
+  on:click={handleButton}
+>
   <slot />
 </button>
 
