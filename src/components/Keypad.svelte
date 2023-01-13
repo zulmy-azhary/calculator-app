@@ -9,7 +9,7 @@
 
   // Func for number keys
   const appendNumber = (number: number) => {
-    if ($calc.length >= 16) return;
+    if ($calc.length >= 14) return;
     if ($calc === "0") return ($calc = number.toString());
 
     if (waitingSecondValue) {
@@ -21,7 +21,7 @@
 
   // Func for operator keys
   const chooseOperator = (operatorParam: string) => {
-    if (firstValue === null || waitingSecondValue) {
+    if (!firstValue || waitingSecondValue) {
       firstValue = Number($calc);
     } else {
       compute();
@@ -53,7 +53,7 @@
 
   // Func to execute
   const compute = () => {
-    if(firstValue === null || waitingSecondValue) return;
+    if (waitingSecondValue) return;
 
     if (operator === "+") {
       $calc = (firstValue + Number($calc)).toString();
@@ -65,7 +65,8 @@
       $calc = (firstValue / Number($calc)).toString();
     }
 
-    firstValue = null;
+    firstValue = +$calc;
+    operator = null;
   };
 
   // Handle Click when key pressed
