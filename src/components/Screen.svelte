@@ -6,16 +6,12 @@
     if (!isNaN(+calc)) {
       let inputValue = calc;
       let [mainNumbers, decimalNumbers] = inputValue.split(".");
-      let mainNumbersArray = mainNumbers.split("");
-
-      for (let i = mainNumbersArray.length - 3; i > 0; i -= 3) {
-        mainNumbersArray.splice(i, 0, ",");
-      }
+      mainNumbers = mainNumbers.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
       if (decimalNumbers) {
-        return mainNumbersArray.join("") + "." + decimalNumbers;
+        return mainNumbers + "." + decimalNumbers;
       }
-      return mainNumbersArray.join("");
+      return mainNumbers;
     }
   };
 </script>

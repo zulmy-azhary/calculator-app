@@ -1,24 +1,26 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-
   const themeList = [null, "theme-2", "theme-3"];
-  let themeIndex = 0;
-  $: setTheme = handleTheme(themeList, themeIndex);
+  $: handleTheme(themeList, themeIndex);
+  $: themeIndex = checkStorage();
 
   const handleTheme = (themeList: string[], themeIndex: number) => {
     const currentTheme = themeList[themeIndex];
-    const html = document.documentElement;
+    const html: HTMLElement = document.documentElement;
 
-    if (!currentTheme) return html.removeAttribute("data-theme");
+    if (!currentTheme) {
+      localStorage.setItem("data-theme", "default-theme");
+      return html.removeAttribute("data-theme");
+    }
     html.setAttribute("data-theme", currentTheme);
+    localStorage.setItem("data-theme", currentTheme);
   };
 
-  const toggle = () => {
-    if (themeIndex >= 2) return (themeIndex = 0);
-    themeIndex++;
+  const checkStorage = () => {
+    const dataTheme = localStorage.getItem("data-theme");
+    if (dataTheme === "theme-2") return 1;
+    if (dataTheme === "theme-3") return 2;
+    return 0;
   };
-
-  onMount(() => setTheme);
 </script>
 
 <header>
@@ -26,9 +28,39 @@
   <div class="theme">
     <h5>Theme</h5>
     <div class="toggle">
-      <button on:click={() => themeIndex = 0}>1</button>
-      <button on:click={() => themeIndex = 1}>2</button>
-      <button on:click={() => themeIndex = 2}>3</button>
+      <div class="toggle-radio">
+        <label for="1">1</label>
+        <input
+          id="1"
+          type="radio"
+          bind:group={themeIndex}
+          name="theme"
+          value={0}
+          on:click={() => (themeIndex = 0)}
+        />
+      </div>
+      <div class="toggle-radio">
+        <label for="2">2</label>
+        <input
+          id="2"
+          type="radio"
+          bind:group={themeIndex}
+          name="theme"
+          value={1}
+          on:click={() => (themeIndex = 1)}
+        />
+      </div>
+      <div class="toggle-radio">
+        <label for="3">3</label>
+        <input
+          id="3"
+          type="radio"
+          bind:group={themeIndex}
+          name="theme"
+          value={2}
+          on:click={() => (themeIndex = 2)}
+        />
+      </div>
     </div>
   </div>
 </header>
@@ -54,21 +86,34 @@
   h5 {
     text-transform: uppercase;
     color: var(--textScreen);
+    align-self: end;
   }
 
   .toggle {
     display: flex;
     justify-content: center;
     align-items: center;
-    column-gap: .125rem;
+    column-gap: 0.5rem;
   }
 
-  .toggle button {
-    padding: .125rem;
+  .toggle input {
+    padding: 0.125rem;
     background-color: var(--bgKeyAccent);
-    border: none;
-    width: 1.25rem;
-    height: 1.25rem;
-    border-radius: 50%;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .toggle-radio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .toggle-radio label {
+    font-size: 0.75rem;
+    line-height: 1;
+    font-weight: 500;
+    color: var(--textScreen);
   }
 </style>
