@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { ToggleItem } from ".";
+
   const themeList = [null, "theme-2", "theme-3"];
   $: handleTheme(themeList, themeIndex);
   $: themeIndex = checkStorage();
@@ -26,8 +28,6 @@
     const target = e.target as HTMLInputElement;
     themeIndex = +target.value;
   };
-
-  $: position = themeIndex === 0 ? 0 : themeIndex === 1 ? 50 : 100;
 </script>
 
 <header>
@@ -35,10 +35,15 @@
   <div class="theme">
     <h5>Theme</h5>
     <div class="toggle">
-      <div class="toggle-radio" style="--position: {position};">
-        <input type="radio" bind:group={themeIndex} name="theme" value={0} on:click={toggle} />
-        <input type="radio" bind:group={themeIndex} name="theme" value={1} on:click={toggle} />
-        <input type="radio" bind:group={themeIndex} name="theme" value={2} on:click={toggle} />
+      <div class="toggle-title">
+        <p>1</p>
+        <p>2</p>
+        <p>3</p>
+      </div>
+      <div class="toggle-radio">
+        <ToggleItem {themeIndex} value={0} on:click={toggle} />
+        <ToggleItem {themeIndex} value={1} on:click={toggle} />
+        <ToggleItem {themeIndex} value={2} on:click={toggle} />
       </div>
     </div>
   </div>
@@ -70,13 +75,34 @@
 
   .toggle {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    column-gap: 0.5rem;
     user-select: none;
   }
 
+  .toggle-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0.25rem;
+    column-gap: 0.5rem;
+  }
+
+  .toggle-title p {
+    text-align: center;
+    flex: 1;
+    color: var(--textScreen);
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
   .toggle-radio {
+    --height: 26px;
+    --width: calc(var(--height) * 3);
+    width: var(--width);
+    height: var(--height);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -85,18 +111,5 @@
     padding: 0.25rem;
     border-radius: 15px;
     column-gap: 0.5rem;
-    min-height: 1.5rem;
   }
-
-  /* .toggle-radio:after {
-    position: absolute;
-    content: "";
-    width: .875rem;
-    height: .875rem;
-    left: var(--position);
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: var(--bgKeyAccent);
-    border-radius: 50%;
-  } */
 </style>

@@ -10,7 +10,6 @@
 
   // Func for number keys
   const appendNumber = (number: number) => {
-    if ($calc.length >= 14) return;
     if ($calc === initialValue) {
       $calc = number.toString();
       return;
@@ -19,6 +18,7 @@
       $calc = "";
       waitingSecondValue = false;
     }
+    if ($calc.length >= 14) return;
 
     $calc += number;
   };
@@ -123,7 +123,7 @@
     border-radius: 12px;
   }
 
-  @media (min-width: 1440px) {
+  @media (min-width: 768px) {
     .keypad {
       gap: 2rem;
       padding: 2rem;

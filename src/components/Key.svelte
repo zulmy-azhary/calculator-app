@@ -34,9 +34,9 @@
     align-items: center;
     padding: 0.9rem 1rem;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     font-family: "League Spartan";
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 700;
     transition: transform 0.2s, box-shadow 0.2s;
     background-color: var(--bgColor);
@@ -58,20 +58,24 @@
     --boxShadow: var(--bgKeyMainShadow);
   }
 
+  .secondary,
+  .accent {
+    text-transform: uppercase;
+    font-size: 1.25rem;
+    font-weight: 600;
+    padding: 1.25rem 1rem;
+  }
+
   .secondary {
     --bgColor: var(--bgKeySecondary);
     --color: var(--textSecondary);
     --boxShadow: var(--bgKeySecondaryShadow);
-    text-transform: uppercase;
-    font-size: 2rem;
   }
 
   .accent {
     --bgColor: var(--bgKeyAccent);
     --color: var(--textAccent);
     --boxShadow: var(--bgKeyAccentShadow);
-    text-transform: uppercase;
-    font-size: 2rem;
   }
 
   .col-span-1 {
@@ -80,5 +84,18 @@
 
   .col-span-2 {
     grid-column: span 2 / span 2;
+  }
+
+  @media (min-width: 768px) {
+    button {
+      font-size: 2.5rem;
+      border-radius: 10px;
+      padding: 1rem;
+    }
+
+    .secondary,
+    .accent {
+      font-size: 2rem;
+    }
   }
 </style>

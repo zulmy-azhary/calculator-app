@@ -22,7 +22,7 @@
 
 <style scoped>
   .screen {
-    padding: 2.5rem 2rem;
+    padding: 1.5rem;
     text-align: end;
     background-color: var(--bgScreen);
     color: var(--textScreen);
@@ -34,8 +34,19 @@
   }
 
   .output {
-    font-size: 3.5rem;
-    line-height: 3rem;
-    font-weight: 700;
+    font-size: 2rem;
+    line-height: 2.75rem;
+    font-weight: 600;
+  }
+
+  @media (min-width: 768px) {
+    .screen {
+      padding: 2.5rem 2rem;
+    }
+    .output {
+      font-size: 3.5rem;
+      line-height: 3rem;
+      font-weight: 700;
+    }
   }
 </style>
