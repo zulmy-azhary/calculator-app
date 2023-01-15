@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { calc } from "../stores/calc";
+  import { calc } from "../stores";
   $: filteredOutput = filteredCalc($calc);
 
   const filteredCalc = (calc: string) => {

@@ -21,6 +21,13 @@
     if (dataTheme === "theme-3") return 2;
     return 0;
   };
+
+  const toggle = (e: Event) => {
+    const target = e.target as HTMLInputElement;
+    themeIndex = +target.value;
+  };
+
+  $: position = themeIndex === 0 ? 0 : themeIndex === 1 ? 50 : 100;
 </script>
 
 <header>
@@ -28,38 +35,10 @@
   <div class="theme">
     <h5>Theme</h5>
     <div class="toggle">
-      <div class="toggle-radio">
-        <label for="1">1</label>
-        <input
-          id="1"
-          type="radio"
-          bind:group={themeIndex}
-          name="theme"
-          value={0}
-          on:click={() => (themeIndex = 0)}
-        />
-      </div>
-      <div class="toggle-radio">
-        <label for="2">2</label>
-        <input
-          id="2"
-          type="radio"
-          bind:group={themeIndex}
-          name="theme"
-          value={1}
-          on:click={() => (themeIndex = 1)}
-        />
-      </div>
-      <div class="toggle-radio">
-        <label for="3">3</label>
-        <input
-          id="3"
-          type="radio"
-          bind:group={themeIndex}
-          name="theme"
-          value={2}
-          on:click={() => (themeIndex = 2)}
-        />
+      <div class="toggle-radio" style="--position: {position};">
+        <input type="radio" bind:group={themeIndex} name="theme" value={0} on:click={toggle} />
+        <input type="radio" bind:group={themeIndex} name="theme" value={1} on:click={toggle} />
+        <input type="radio" bind:group={themeIndex} name="theme" value={2} on:click={toggle} />
       </div>
     </div>
   </div>
@@ -94,26 +73,30 @@
     justify-content: center;
     align-items: center;
     column-gap: 0.5rem;
-  }
-
-  .toggle input {
-    padding: 0.125rem;
-    background-color: var(--bgKeyAccent);
-    width: 1rem;
-    height: 1rem;
+    user-select: none;
   }
 
   .toggle-radio {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
+    background-color: var(--bgKeypad);
+    padding: 0.25rem;
+    border-radius: 15px;
+    column-gap: 0.5rem;
+    min-height: 1.5rem;
   }
 
-  .toggle-radio label {
-    font-size: 0.75rem;
-    line-height: 1;
-    font-weight: 500;
-    color: var(--textScreen);
-  }
+  /* .toggle-radio:after {
+    position: absolute;
+    content: "";
+    width: .875rem;
+    height: .875rem;
+    left: var(--position);
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--bgKeyAccent);
+    border-radius: 50%;
+  } */
 </style>

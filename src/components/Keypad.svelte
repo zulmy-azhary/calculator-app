@@ -1,31 +1,36 @@
 <script lang="ts">
   import { Key } from ".";
-  import { calc } from "../stores/calc";
+  import { calc } from "../stores";
   import type { EventDispatch } from "../types";
 
   let firstValue: number = null;
   let operator: string = null;
   let waitingSecondValue: boolean = false;
+  const initialValue: string = "0";
 
   // Func for number keys
   const appendNumber = (number: number) => {
     if ($calc.length >= 14) return;
-    if ($calc === "0") return ($calc = number.toString());
-
+    if ($calc === initialValue) {
+      $calc = number.toString();
+      return;
+    }
     if (waitingSecondValue) {
       $calc = "";
       waitingSecondValue = false;
     }
+
     $calc += number;
   };
 
   // Func for operator keys
   const chooseOperator = (operatorParam: string) => {
     if (!firstValue || waitingSecondValue) {
-      firstValue = Number($calc);
+      firstValue = +$calc;
     } else {
       compute();
     }
+
     operator = operatorParam;
     waitingSecondValue = true;
   };
@@ -39,8 +44,12 @@
 
   // Func for del key
   const deleteLastChar = () => {
-    if ($calc.length <= 1) return ($calc = "0");
-    return ($calc = $calc.slice(0, -1));
+    if ($calc.length <= 1) {
+      $calc = initialValue;
+      return;
+    }
+
+    $calc = $calc.slice(0, -1);
   };
 
   // Func for reset key
@@ -48,7 +57,7 @@
     firstValue = null;
     operator = null;
     waitingSecondValue = false;
-    calc.reset();
+    $calc = initialValue;
   };
 
   // Func to execute
